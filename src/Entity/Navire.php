@@ -5,7 +5,10 @@ namespace App\Entity;
 use App\Repository\NavireRepository;
 use Doctrine\ORM\Mapping as ORM;
 
+#[Assert\Unique(fiefds:['imo','mmsi','indicatifAppel'])]
 #[ORM\Entity(repositoryClass: NavireRepository::class)]
+#[ORM\Index(name:'ind_IMO',columns:['imo'])]
+#[ORM\Index(name:'ind_MMST',columns:['mmsi'])]
 class Navire
 {
     #[ORM\Id]
@@ -44,6 +47,10 @@ class Navire
     #[ORM\ManyToOne(inversedBy: 'navires')]
     #[ORM\JoinColumn(nullable: false)]
     private ?AisShipType $type = null;
+
+    #[ORM\ManyToOne(inversedBy: 'navires',cascade:['persist'])]
+    #[ORM\JoinColumn(name:'idport',referencedColumnName:'id',nullable:true)]
+    private ?Port $destination = null;
 
     public function getId(): ?int
     {
@@ -157,4 +164,17 @@ class Navire
 
         return $this;
     }
+
+    public function getDestination(): ?Port
+    {
+        return $this->destination;
+    }
+
+    public function setDestination(?Port $destination): static
+    {
+        $this->destination = $destination;
+
+        return $this;
+    }
+
 }

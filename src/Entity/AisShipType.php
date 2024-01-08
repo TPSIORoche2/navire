@@ -6,7 +6,7 @@ use App\Repository\AisShipTypeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-#[ORM\Table (name: 'aisshptype')]
+#[ORM\Table (name: 'aisshiptype')]
 #[ORM\Entity(repositoryClass: AisShipTypeRepository::class)]
 class AisShipType
 {
@@ -15,7 +15,7 @@ class AisShipType
     #[ORM\Column (name:'id')]
     private ?int $id = null;
 
-    #[ORM\Column (name:'aisshptype')]
+    #[ORM\Column (name:'aisshiptype')]
     #[Assert\Range(
             min:1,
             max:9,
@@ -123,4 +123,5 @@ class AisShipType
 
         return $this;
     }
+    
 }

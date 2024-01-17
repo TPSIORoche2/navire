@@ -48,6 +48,6 @@ class AisShipTypeRepository extends ServiceEntityRepository
     
     public function findNavireCompatible($value):array
     {
-        return $this->createQueryBuilder('a')
+        return $this->createQueryBuilder('a');
     }
 }
